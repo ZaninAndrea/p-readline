@@ -1,0 +1,24 @@
+{
+    "name": "p-readline",
+    "version": "1.0.0",
+    "description": "Promise-based readline",
+    "main": "index.js",
+    "dependencies": {
+        "chalk": "^2.3.0"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "node test.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ZaninAndrea/p-readline.git"
+    },
+    "keywords": ["promise", "readline"],
+    "author": "andreazanin",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/ZaninAndrea/p-readline/issues"
+    },
+    "homepage": "https://github.com/ZaninAndrea/p-readline#readme"
+}
