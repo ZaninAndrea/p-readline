@@ -1,6 +1,6 @@
 {
     "name": "p-readline",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Promise-based readline",
     "main": "index.js",
     "dependencies": {
