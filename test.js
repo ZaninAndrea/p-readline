@@ -1,7 +1,7 @@
 const ask = require("./index.js")
 
 async function myAsyncFunc() {
-    const answer = await ask("How are you?", {defaultValue: "happy"})
+    const answer = await ask("How are you?")
     console.log(`I'm glad you feel ${answer}`)
     const answer2 = await ask("How are you?", {
         defaultValue: "happy",
@@ -15,6 +15,10 @@ async function myAsyncFunc() {
         bgRgb: [0, 100, 50],
     })
     console.log(`I'm glad you feel ${answer3}`)
+    const pass = await ask("Type password", {
+        password: true,
+    })
+    console.log(`Secret pass: ${pass}`)
 }
 
 myAsyncFunc()

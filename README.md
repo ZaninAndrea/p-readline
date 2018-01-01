@@ -49,6 +49,7 @@ The options supported are:
 
 * `defaultValue`(string): a fallback value if the user writes nothing
 * `hideDefault`(boolean): if true does not show the default value to the user
+* `password` (boolean): if true the user's input is hidden
 * `color`(string): text color. Supported:
   * black
   * red

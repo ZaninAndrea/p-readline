@@ -1,5 +1,6 @@
 const readline = require("readline")
 const chalk = require("chalk")
+const Writable = require("stream").Writable
 
 function titleCase(str) {
     let newString = str
@@ -9,11 +10,6 @@ function titleCase(str) {
 
 function ask(question, option) {
     return new Promise((resolve, reject) => {
-        const rl = readline.createInterface({
-            input: process.stdin,
-            output: process.stdout,
-        })
-
         const questionText = option
             ? option.defaultValue
               ? option.hideDefault
@@ -26,6 +22,7 @@ function ask(question, option) {
         if (
             option &&
             Object.keys(option).length -
+                (option.hasOwnProperty("password") ? 1 : 0) -
                 (option.hasOwnProperty("defaultValue") ? 1 : 0) -
                 (option.hasOwnProperty("hideDefault") ? 1 : 0) !==
                 0
@@ -65,6 +62,27 @@ function ask(question, option) {
             formatter = chalk.green
         }
 
+        let mutableStdout = new Writable({
+            write: function(chunk, encoding, callback) {
+                if (
+                    !this.password ||
+                    chunk.toString() === "\n" ||
+                    chunk.toString() === "\r\n" ||
+                    chunk.toString() === "\r"
+                )
+                    process.stdout.write(chunk, encoding)
+                callback()
+            },
+        })
+
+        mutableStdout.password = false
+
+        const rl = readline.createInterface({
+            input: process.stdin,
+            output: mutableStdout,
+            terminal: true,
+        })
+
         rl.question(formatter(questionText), answer => {
             rl.close()
 
@@ -73,6 +91,8 @@ function ask(question, option) {
 
             resolve(answer)
         })
+
+        mutableStdout.password = option && option.password
     })
 }
 
